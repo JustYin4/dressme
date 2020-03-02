@@ -1,11 +1,12 @@
 body {
     text-align: center;
     font: 10px calibri;
+    background-color: blanchedalmond;
 }
 
 button {
 
-    background-color: #fff;
+    background-color: blanchedalmond;
     font: 14px calibri;
     border: none;
     color: #777;
@@ -20,6 +21,16 @@ button {
 
 #create {
     
+    border: .75px solid #777;
+    background-color: white;
+
+}
+
+#add {
+    
+    border: .75px solid #777;
+    background-color: white;
+
 }
 
 h1 {
