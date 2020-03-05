@@ -2,5 +2,6 @@
 
 Dependencies:
 Node.js
-  npm
-  express
+npm
+express
+multer
