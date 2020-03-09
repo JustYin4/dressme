@@ -21,7 +21,7 @@ window.onload = function(){
 	document.getElementById("footwear").addEventListener("click", footwear);
 	document.getElementById("hats").addEventListener("click", hats)
 	document.getElementById("others").addEventListener("click", others)
-	document.getElementById("login").addEventListener("click", login);
+	document.getElementById("loginForm").addEventListener("click", login);
 }
 
 // Event listeners that call a request chain for getting the proper clothing
