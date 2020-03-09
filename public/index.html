@@ -12,31 +12,85 @@
     Purpose: Home page for the website dressme
 -->
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width">
-        <title>DressMe</title>
-        <link rel="stylesheet" href="dressmeStyles.css">
-        <script type="text/javascript" src="dressme.js"></script>
-    </head>
-    <body>
-	<form method="POST" id="loginForm">
-		<input type="text" name="user">
-		<input type="password" name="pass">
-		<input type="submit" value="Login">
-	</form>
-         <h1>Jhusthin's closet</h1>
-         <div id="buttons">
-            <button id="add">Add to Closet</button>
-            <button id="all">All</button>
-            <button id="shirts">Shirts</button>
-            <button id="pants">Pants</button>
-            <button id="outerwear">Outerwear</button>
-            <button id="accessories">Accessories</button>
-            <button id="footwear">Footwear</button>
-            <button id="hats">Hats</button>
-            <button id="others">Others</button>
-            <button id="create">Create an Outfit!</button>
-        </div>
-        <div id="show"></div>
-     </body>
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>DressMe</title>
+    <link rel="stylesheet" href="dressmeStyles.css">
+    <script type="text/javascript" src="dressme.js"></script>
+</head>
+
+<body>
+    <form method="POST" id="loginForm">
+        <input type="text" name="user">
+        <input type="password" name="pass">
+        <input type="submit" value="Login">
+    </form>
+    <h1>Jhusthin's closet</h1>
+    <div id="buttons">
+        <button id="add" class="buttons">Add to Closet</button>
+        <button id="all" class="buttons">All</button>
+        <button id="shirts" class="buttons">Shirts</button>
+        <button id="pants" class="buttons">Pants</button>
+        <button id="outerwear" class="buttons">Outerwear</button>
+        <button id="accessories" class="buttons">Accessories</button>
+        <button id="footwear" class="buttons">Footwear</button>
+        <button id="hats" class="buttons">Hats</button>
+        <button id="others" class="buttons">Others</button>
+        <button id="create" class="buttons"> Create an Outfit!</button>
+    </div>
+    <div id="show"></div>
+
+    <center>
+        <form id="upload" enctype="multipart/form-data">
+            <label for="type">Select image type: </label>
+            <select id="type">Image type:
+                    <option value="all">All</option>
+                    <option value="shirts">Shirts</option>
+                    <option value="pants">Pants</option>
+                    <option value="outerwear">Outerwear</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="footwear">Footwear</option>
+                    <option value="hats">Hats</option>
+                    <option value="others">Others</option>
+                </select>
+            <label for="image">Select image: </label>
+            <input type="file" id="image" accept="image/*"><br><br>
+            <button type="button" onclick="upload()">submit!</button>
+        </form>
+    </center>
+    <br><br>
+    <center>
+        <img id="picture" src="">
+    </center>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-analytics.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyChmMbPN4RU5T5soxQg40bNGStObL9bIeA",
+            authDomain: "dressme-9b824.firebaseapp.com",
+            databaseURL: "https://dressme-9b824.firebaseio.com",
+            projectId: "dressme-9b824",
+            storageBucket: "dressme-9b824.appspot.com",
+            messagingSenderId: "397044817470",
+            appId: "1:397044817470:web:daac489987ffcab775fb6f",
+            measurementId: "G-FKJDCWRBCN"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</body>
+
 </html>
