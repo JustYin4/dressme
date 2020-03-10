@@ -35,12 +35,24 @@ function addClothes() {
 
 // Event listeners that call a request chain for getting the proper clothing
 function allButton() {
+    var allPictures = document.querySelector(".pictures");
+    allPictures.innerHTML = "";
     sendGet("all");
     retrieve("all").then(function(result) {
+<<<<<<< HEAD
         for (i=0; i<(result.length); i++) {
             
         }
         //document.getElementById("picture").src = result[0]
+=======
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            allPictures.appendChild(picture);
+        }
+        document.getElementById("picture").src = result[1]
+>>>>>>> jacy
     }).catch(function(error) {
         console.log(error)
     })
