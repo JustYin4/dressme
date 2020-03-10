@@ -39,12 +39,6 @@ function allButton() {
     allPictures.innerHTML = "";
     sendGet("all");
     retrieve("all").then(function(result) {
-<<<<<<< HEAD
-        for (i=0; i<(result.length); i++) {
-            
-        }
-        //document.getElementById("picture").src = result[0]
-=======
         for (i=0; i<result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
@@ -52,7 +46,6 @@ function allButton() {
             allPictures.appendChild(picture);
         }
         document.getElementById("picture").src = result[1]
->>>>>>> jacy
     }).catch(function(error) {
         console.log(error)
     })
