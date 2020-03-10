@@ -45,7 +45,6 @@ function allButton() {
             picture.src = image;
             allPictures.appendChild(picture);
         }
-        document.getElementById("picture").src = result[1]
     }).catch(function(error) {
         console.log(error)
     })
