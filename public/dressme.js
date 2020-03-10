@@ -90,7 +90,7 @@ function login() {
 function sendGet(clothType) {
 	document.getElementById("upload").style.display = "None";
 	document.getElementById("show").style.display = "inline";
-	document.getElementById("pictureSection").style.display = "inline";
+	document.querySelector(".pictures").style.display = "inline";
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", updateShow);
     xhr.open("GET", "http://localhost:8080/test?clothType=" + clothType);
