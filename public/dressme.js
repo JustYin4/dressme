@@ -5,7 +5,7 @@
              Cameron Fritz
   
   Date Created: 3/3/2020
-  Last Updated: 3/9/2020
+  Last Updated: 3/10/2020
   
   File: dressme.js
   Purpose: Event listeners and scripts to communicate with the dressme server
@@ -13,6 +13,7 @@
 
 // Makes sure that event listeners are added after the web page is loaded
 window.onload = function() {
+	document.getElementById("add").addEventListener("click", addClothes);
     document.getElementById("all").addEventListener("click", allButton);
     document.getElementById("shirts").addEventListener("click", shirts);
     document.getElementById("pants").addEventListener("click", pants);
@@ -22,6 +23,14 @@ window.onload = function() {
     document.getElementById("hats").addEventListener("click", hats)
     document.getElementById("others").addEventListener("click", others)
     document.getElementById("loginForm").addEventListener("click", login);
+	
+	document.getElementById("upload").style.display = "None";
+}
+
+function addClothes() {
+	document.getElementById("upload").style.display = "inline";
+	document.getElementById("show").style.display = "None";
+	document.getElementById("pictureSection").style.display = "None";
 }
 
 // Event listeners that call a request chain for getting the proper clothing
@@ -72,6 +81,9 @@ function login() {
 
 // Sends the request to the server
 function sendGet(clothType) {
+	document.getElementById("upload").style.display = "None";
+	document.getElementById("show").style.display = "inline";
+	document.getElementById("pictureSection").style.display = "inline";
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", updateShow);
     xhr.open("GET", "http://localhost:8080/test?clothType=" + clothType);
