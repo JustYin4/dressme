@@ -37,7 +37,10 @@ function addClothes() {
 function allButton() {
     sendGet("all");
     retrieve("all").then(function(result) {
-        document.getElementById("picture").src = result[1]
+        for (i=0; i<(result.length); i++) {
+            
+        }
+        //document.getElementById("picture").src = result[0]
     }).catch(function(error) {
         console.log(error)
     })
