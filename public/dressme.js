@@ -22,7 +22,6 @@ window.onload = function() {
     document.getElementById("footwear").addEventListener("click", footwear);
     document.getElementById("hats").addEventListener("click", hats)
     document.getElementById("others").addEventListener("click", others)
-    document.getElementById("loginForm").addEventListener("click", login);
 	
 	document.getElementById("upload").style.display = "None";
 }
@@ -30,11 +29,11 @@ window.onload = function() {
 function addClothes() {
 	document.getElementById("upload").style.display = "inline";
 	document.getElementById("show").style.display = "None";
-	document.getElementById("pictureSection").style.display = "None";
+	// document.getElementById("pictureSection").style.display = "None";
 }
 
 // Event listeners that call a request chain for getting the proper clothing
-function allButton() {
+function allButton(user) {
     var allPictures = document.querySelector(".pictures");
     allPictures.innerHTML = "";
     sendGet("all");
@@ -78,13 +77,6 @@ function others() {
     sendGet("others");
 }
 
-// Send request to server to login
-function login() {
-    let xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", updateShow);
-    xhr.open("POST", "http://localhost:8080/login");
-    xhr.send();
-}
 
 // Sends the request to the server
 function sendGet(clothType) {
@@ -104,13 +96,15 @@ function updateShow() {
     display.innerHTML = this.response;
 }
 
-function upload() {
+function upload(x) {
     var selected = document.getElementById("type");
     var selectedVal = selected.options[selected.selectedIndex].value
     var image = document.getElementById("image").files[0];
     var imageName = image.name;
     var rawImageName = imageName.replace(/\..+$/, '')
     var storageRef = firebase.storage().ref("images/" + selectedVal + "/" + imageName);
+
+    console.log(x)
 
     // Checks if image already exists
     if (imageName in firebase.storage().ref("images/all/")) {
@@ -147,13 +141,10 @@ function upload() {
                     firebase.database().ref().update(updates)
                 }
                 snapshot.forEach(userSnapshot => {
-                    console.log("goes here")
                     if (rawImageName === userSnapshot.key) {
-                        console.log("goes here")
                         updates["/" + selectedVal + "/" + postKey] = postData;
                         firebase.database().ref().update(updates)
                     } else {
-                        console.log("goes here")
                         updates["/all/" + postKey] = postData;
                         firebase.database().ref().update(updates)
                         updates["/" + selectedVal + "/" + postKey] = postData;
