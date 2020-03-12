@@ -31,12 +31,12 @@ h1 {
 
 /* index.html */
 #create {
-    border: .75px solid #777;
+    border: .75px solid #d3d3d3;
     background-color: white;
 }
 
 #add {
-    border: .75px solid #777;
+    border: .75px solid #d3d3d3;
     background-color: white;
 }
 
@@ -44,7 +44,7 @@ h1 {
 
 /* outfit.html only*/
 #back {
-    border: .75px solid #777;
+    border: .75px solid #d3d3d3;
     background-color: white;
 }
 
@@ -55,16 +55,16 @@ h1 {
 
 /* for images */
 img {
-    padding: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    border-radius:2px;
+    padding: 15px;
+    margin: 10px;
     background-color: #fff;
     display: inline-block;
 }
 
 .img {
-    width:200px;
-    height:200px;
+    width:175px;
+    height:175px;
     object-fit:cover;
 }
 
