@@ -52,3 +52,23 @@ h1 {
     border: .75px solid #777;
     background-color: white;
 }
+
+/* for images */
+img {
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #fff;
+    display: inline-block;
+}
+
+.img {
+    width:200px;
+    height:200px;
+    object-fit:cover;
+}
+
+.pictures {
+    background-size:cover;
+    background-position:center;
+}
