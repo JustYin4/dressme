@@ -21,36 +21,34 @@
 </head>
 
 <body>
-    <div id="modal-signup" class="modal">
-        <div class="modal-content">
-        <form id="signupForm">
-                <div class="input-field">
-                    <label for="signup-email">Email Address</label>
-                    <input type="email" id="signup-email" required>
-                </div>
-                <div class="input-field">
-                    <label for="signup-pass">Enter Password</label>
-                    <input type="password" id="signup-pass" required>
-                </div>
-            </div>>
-            <input type="submit" value="Register">
-        </form>
-    </div>
-    
-    <br><br>
-    <button type="button" id="logout">Log out</button>
-
-    <div id="modal-signin" class="modal">
+    <span > DressMe </span>
+    <span id="modal-signin" class="modal">
     <form id="loginForm">
-        <div class="input-field">
-        <input type="text" id="signin-email" required>
-        </div>
-        <div class="input-field">
-        <input type="password" id="signin-pass">
-        </div>
-        <input type="submit" value="Login">
+        <span class="input-field">
+            <label for="signin-email">Email Address</label>
+            <input type="text" id="signin-email" required>
+        </span>
+
+        <span class="input-field">
+            <label for="signin-pass">Password</label>
+            <input type="password" id="signin-pass">
+        </span>
+        
+        <span>
+            <input type="submit" value="Login">
+        </span>
+
+        <span>
+            <button type="button" id="logout">Log out</button>
+        </span>
+
+        <span>
+            <a href="register.html">
+                <button type="button" id="register">Register</button>
+            </a>
+        </span>
     </form>
-    </div>
+    </span>
 
     <h1 id="closetName">Jhusthin's closet</h1>
     <div id="buttons">
@@ -63,6 +61,7 @@
         <button id="footwear" class="buttons">Footwear</button>
         <button id="hats" class="buttons">Hats</button>
         <button id="others" class="buttons">Others</button>
+        <button id="outfits" class="buttons">Outfits</button>
         <a href="outfit.html">
             <button id="create" class="buttons"> Create an Outfit!</button>
         </a>
