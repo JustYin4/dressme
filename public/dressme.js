@@ -37,6 +37,7 @@ function allButton(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             allPictures.appendChild(picture);
         }
     }).catch(function(error) {
