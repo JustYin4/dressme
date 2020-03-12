@@ -1,15 +1,47 @@
 const signupForm = document.querySelector("#signupForm")
 auth = firebase.auth()
 
-auth.onAuthStateChanged(user => {
-    if (user) {
-        console.log("User logged in")
-        allButton(user.email)
-        document.getElementById("test").innerHTML = user.email
-    } else {
-        console.log("User logged out")
-    }
-})
+
+// Create promise to retrieve information when function is completed
+const promise1 = new Promise(function(resolve, reject) {
+    auth.onAuthStateChanged((user) => {
+        // If user is logged in, enable uploading and retriving
+        if (user) {
+            console.log("User logged in")
+            resolve(user.email)
+            // Update selected, image, and submit buttons when clicked/changed
+            setInterval(function() {
+                var selected = document.getElementById("type")
+                selectedValue = selected.options[selected.selectedIndex].value;
+                selected.addEventListener("change", (s) => {
+                    return selectedValue = selected.options[selected.selectedIndex].value;
+                })
+                document.getElementById("image").onchange = (updateImageValue) => {
+                    var image = document.getElementById("image").files[0];
+                    var imageName = document.getElementById("image").files[0].name;
+                    document.getElementById("addItem").addEventListener("click", (addItem) => {
+                        upload(user.email, selectedValue, image, imageName)
+                    })
+                }}, 1)
+                // If user isn't logged in disable uploading
+                } else {
+                    console.log("User logged out")
+                    }
+                })
+                // Callback function to return email. Used to access respective database
+                }).then(function(value) {
+                    document.getElementById("all").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("add").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("shirts").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("pants").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("outerwear").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("accessories").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("footwear").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("hats").addEventListener("click", function() {allButton(value)})
+                    document.getElementById("others").addEventListener("click", function() {allButton(value)})
+                })
+
+// Sign up
 signupForm.addEventListener("submit", function(event) {
     // Prevent page refresh
     event.preventDefault()
@@ -27,6 +59,7 @@ signupForm.addEventListener("submit", function(event) {
     })
 })
 
+// Sign out
 const logout = document.querySelector("#logout")
 logout.addEventListener("click", function(event) {
     event.preventDefault
@@ -37,6 +70,7 @@ logout.addEventListener("click", function(event) {
     })
 })
 
+// Log in
 const loginForm = document.querySelector("#loginForm")
 loginForm.addEventListener("submit", function(event){
     event.preventDefault()

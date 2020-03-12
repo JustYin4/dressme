@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width">
     <title>DressMe</title>
     <link rel="stylesheet" href="dressmeStyles.css">
-    <script type="text/javascript" src="dressme.js"></script>
+    <script type="text/javascript" src="dressme.js" defer></script>
 </head>
 
 <body>
@@ -84,12 +84,13 @@
                 </select>
             <label for="image">Select image: </label>
             <input type="file" id="image" accept="image/*"><br><br>
-            <button type="button" onclick="upload(document.getElementById('test').innerHTML)">submit!</button>
+            <button type="button" id="addItem">submit!</button>
         </form>
     </center>
     <br><br>
-    <p id="test">hi</p>
+    <p id="welcome">hi nobody</p>
     <center class="pictures">
+        <img id="test">
         <!-- IMAGES -->
     </center>
 
