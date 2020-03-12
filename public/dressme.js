@@ -25,7 +25,7 @@ function addClothes() {
 function allButton(user) {
     var allPictures = document.querySelector(".pictures");
     allPictures.innerHTML = "";
-    sendGet("all");
+    sendGet("All");
 
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
@@ -37,6 +37,7 @@ function allButton(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             allPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -45,31 +46,31 @@ function allButton(user) {
 }
 
 function shirts() {
-    sendGet("shirts");
+    sendGet("Shirts");
 }
 
 function pants() {
-    sendGet("pants");
+    sendGet("Pants");
 }
 
 function outerwear() {
-    sendGet("outerwear");
+    sendGet("Outerwear");
 }
 
 function accessories() {
-    sendGet("accessories");
+    sendGet("Accessories");
 }
 
 function footwear() {
-    sendGet("footwear");
+    sendGet("Footwear");
 }
 
 function hats() {
-    sendGet("hats");
+    sendGet("Hats");
 }
 
 function others() {
-    sendGet("others");
+    sendGet("Others");
 }
 
 
