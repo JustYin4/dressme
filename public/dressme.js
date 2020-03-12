@@ -13,32 +13,26 @@
 
 // Makes sure that event listeners are added after the web page is loaded
 window.onload = function() {
-	document.getElementById("add").addEventListener("click", addClothes);
-    document.getElementById("all").addEventListener("click", allButton);
-    document.getElementById("shirts").addEventListener("click", shirts);
-    document.getElementById("pants").addEventListener("click", pants);
-    document.getElementById("outerwear").addEventListener("click", outerwear);
-    document.getElementById("accessories").addEventListener("click", accessories);
-    document.getElementById("footwear").addEventListener("click", footwear);
-    document.getElementById("hats").addEventListener("click", hats)
-    document.getElementById("others").addEventListener("click", others)
-    document.getElementById("loginForm").addEventListener("click", login);
-	
 	document.getElementById("upload").style.display = "None";
 }
-
 function addClothes() {
 	document.getElementById("upload").style.display = "inline";
 	document.getElementById("show").style.display = "None";
-	document.getElementById("pictureSection").style.display = "None";
+	// document.getElementById("pictureSection").style.display = "None";
 }
 
 // Event listeners that call a request chain for getting the proper clothing
-function allButton() {
+function allButton(user) {
     var allPictures = document.querySelector(".pictures");
     allPictures.innerHTML = "";
     sendGet("all");
-    retrieve("all").then(function(result) {
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "all").then(function(result) {
         for (i=0; i<result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
@@ -78,13 +72,6 @@ function others() {
     sendGet("others");
 }
 
-// Send request to server to login
-function login() {
-    let xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", updateShow);
-    xhr.open("POST", "http://localhost:8080/login");
-    xhr.send();
-}
 
 // Sends the request to the server
 function sendGet(clothType) {
@@ -104,23 +91,21 @@ function updateShow() {
     display.innerHTML = this.response;
 }
 
-function upload() {
-    var selected = document.getElementById("type");
-    var selectedVal = selected.options[selected.selectedIndex].value
-    var image = document.getElementById("image").files[0];
-    var imageName = image.name;
+function upload(user, selectedVal, image, imageName) {
+    // Format parameters
     var rawImageName = imageName.replace(/\..+$/, '')
-    var storageRef = firebase.storage().ref("images/" + selectedVal + "/" + imageName);
+    var storageRef = firebase.storage().ref("users/" + user + "/" + selectedVal + "/" + imageName);
 
     // Checks if image already exists
-    if (imageName in firebase.storage().ref("images/all/")) {
+    if (imageName in firebase.storage().ref("users/" + user + "/all/")) {
         var uploadTask = storageRef.put(image);
     } else {
         var uploadTask = storageRef.put(image);
-        var storageRef = firebase.storage().ref("images/all/" + imageName);
+        var storageRef = firebase.storage().ref("users/" + user + "/all/" + imageName);
         var uploadTask = storageRef.put(image);
     }
 
+    console.log(user, selectedVal, image, imageName)
     // Option to add later: fixing unintended overwrite when using 2 of the same image names
 
     uploadTask.on("state_changed", function(snapshot) {
@@ -129,8 +114,13 @@ function upload() {
     }, function(error) {
         console.log(error.message);
     }, function() {
+        // Strip email
+        removeDomain = user.substring(0, user.lastIndexOf("@"));
+        removeSpecialChar = removeDomain.replace(/@[^@]+$/, '')
+        user = removeSpecialChar
+
         storageRef.getDownloadURL().then(function(downloadURL) {
-            var postKey = firebase.database().ref(selectedVal + "/" + rawImageName).key;
+            var postKey = firebase.database().ref(user + "/" + selectedVal + "/" + rawImageName).key;
             var updates = {};
             var postData = {
                 url: downloadURL,
@@ -139,25 +129,25 @@ function upload() {
 
             // Check if image already exists in all folder
             var ref = firebase.database().ref()
-            ref.child("all").once("value", gotUserData);
+            ref.child(user).once("value", gotUserData);
 
             function gotUserData(snapshot) {
                 if (!snapshot.exists()) {
-                    updates["/" + selectedVal + "/" + postKey] = postData;
+                    updates["/" + user + "/" + selectedVal + "/" + postKey] = postData;
+                    updates["/" + user + "/all/" + postKey] = postData;
                     firebase.database().ref().update(updates)
                 }
                 snapshot.forEach(userSnapshot => {
-                    console.log("goes here")
                     if (rawImageName === userSnapshot.key) {
-                        console.log("goes here")
                         updates["/" + selectedVal + "/" + postKey] = postData;
                         firebase.database().ref().update(updates)
+                        console.log("goes here")
                     } else {
+                        updates["/" + user + "/all/" + postKey] = postData;
+                        firebase.database().ref().update(updates)
+                        updates["/" + user + "/" + selectedVal + "/" + postKey] = postData;
+                        firebase.database().ref().update(updates)
                         console.log("goes here")
-                        updates["/all/" + postKey] = postData;
-                        firebase.database().ref().update(updates)
-                        updates["/" + selectedVal + "/" + postKey] = postData;
-                        firebase.database().ref().update(updates)
                     }
                 })
             }
@@ -165,10 +155,10 @@ function upload() {
     });
 }
 
-function retrieve(clothing) {
+function retrieve(user, choice) {
     return new Promise(function(resolve, reject) {
         try {
-            var db = firebase.database().ref().child(clothing);
+            var db = firebase.database().ref().child(user + "/" + choice);
             db.once("value", pics => {
                 if (!pics.exists()) {
                     resolve([])

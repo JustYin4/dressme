@@ -36,38 +36,6 @@ app.use(session({
     activeDuration: 5 * 60 * 1000,
 }));
 
-// Requirement for the login module
-const login = require("./login");
-
-// Login Endpoint
-app.post("/login", function(req, res) {
-    login.login(conn, req.body.user, req.body.pass, function(val) {
-        if (val <= 0) {
-            req.session.msg = "Invalid login";
-            res.redirect("./");
-        } else {
-            req.session.user = req.body.user;
-            res.redirect("./welcome");
-        }
-    });
-});
-
-// Logout endpoint - Not used yet
-app.get("/logout", function(req, res) {
-    req.session.reset();
-    req.session.msg = "Goodbye";
-    return res.redirect('/');
-});
-
-// Sends a welcome message on successful login
-app.get("/welcome", function(req, res) {
-    if (!req.session.user) {
-        req.session.msg = 'Access Denied';
-        return res.redirect('/');
-    }
-    res.send("Welcome" + req.session.user);
-});
-
 // Test endpoint
 app.get("/test", function(req, res) {
     console.log(req.query.clothType);

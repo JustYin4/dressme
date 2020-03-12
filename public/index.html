@@ -17,15 +17,41 @@
     <meta name="viewport" content="width=device-width">
     <title>DressMe</title>
     <link rel="stylesheet" href="dressmeStyles.css">
-    <script type="text/javascript" src="dressme.js"></script>
+    <script type="text/javascript" src="dressme.js" defer></script>
 </head>
 
 <body>
-    <form method="POST" id="loginForm">
-        <input type="text" name="user">
-        <input type="password" name="pass">
+    <div id="modal-signup" class="modal">
+        <div class="modal-content">
+        <form id="signupForm">
+                <div class="input-field">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="input-field">
+                    <label for="signup-pass">Enter Password</label>
+                    <input type="password" id="signup-pass" required>
+                </div>
+            </div>>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    
+    <br><br>
+    <button type="button" id="logout">Log out</button>
+
+    <div id="modal-signin" class="modal">
+    <form id="loginForm">
+        <div class="input-field">
+        <input type="text" id="signin-email" required>
+        </div>
+        <div class="input-field">
+        <input type="password" id="signin-pass">
+        </div>
         <input type="submit" value="Login">
     </form>
+    </div>
+
     <h1 id="closetName">Jhusthin's closet</h1>
     <div id="buttons">
         <button id="add" class="buttons">Add to Closet</button>
@@ -58,11 +84,13 @@
                 </select>
             <label for="image">Select image: </label>
             <input type="file" id="image" accept="image/*"><br><br>
-            <button type="button" onclick="upload()">submit!</button>
+            <button type="button" id="addItem">submit!</button>
         </form>
     </center>
     <br><br>
+    <p id="welcome">hi nobody</p>
     <center class="pictures">
+        <img id="test">
         <!-- IMAGES -->
     </center>
 
@@ -93,6 +121,7 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
+    <script src="auth.js"></script>
 </body>
 
 </html>
