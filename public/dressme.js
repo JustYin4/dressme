@@ -62,6 +62,7 @@ function shirts(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             shirtPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -84,6 +85,7 @@ function pants(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             pantPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -106,6 +108,7 @@ function outerwear(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             outerwearPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -128,6 +131,7 @@ function accessories(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             accessPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -150,6 +154,7 @@ function footwear(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             footPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -172,6 +177,7 @@ function hats(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             hatPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -194,6 +200,7 @@ function others(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             otherPictures.appendChild(picture);
         }
     }).catch(function(error) {
