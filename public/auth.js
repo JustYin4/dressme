@@ -20,9 +20,11 @@ const promise1 = new Promise(function(resolve, reject) {
             if (user) {
                 console.log("User logged in")
                 resolve(user.email)
-				let name = document.getElementById("closetName");
-				name.innerHTML = user.email.split("@")[0] + "'s Closet"
-                    // Update selected, image, and submit buttons when clicked/changed
+				if (document.getElementById("closetName")){
+					let name = document.getElementById("closetName");
+					name.innerHTML = user.email.split("@")[0] + "'s Closet"
+                }
+				// Update selected, image, and submit buttons when clicked/changed
 				if(document.getElementById("type")){
 					setInterval(function() {
                         var selected = document.getElementById("type")
@@ -47,6 +49,7 @@ const promise1 = new Promise(function(resolve, reject) {
         // Callback function to return email. Used to access respective database
 }).then(function(value) {
 	if(document.getElementById("all")){
+		document.getElementById("add").addEventListener("click", function() { addClothes(value) })
 		document.getElementById("all").addEventListener("click", function() { allButton(value) })
 		document.getElementById("shirts").addEventListener("click", function() { shirts(value) })
 		document.getElementById("pants").addEventListener("click", function() { pants(value) })
@@ -54,6 +57,7 @@ const promise1 = new Promise(function(resolve, reject) {
 		document.getElementById("accessories").addEventListener("click", function() { accessories(value) })
 		document.getElementById("footwear").addEventListener("click", function() { footwear(value) })
 		document.getElementById("hats").addEventListener("click", function() { hats(value) })
+		document.getElementById("others").addEventListener("click", function() { others(value) })
 	}
 	if (document.getElementById("createO")){
 		document.getElementById("createO").addEventListener("click", function() { createOutfit(value) })
@@ -62,8 +66,7 @@ const promise1 = new Promise(function(resolve, reject) {
 })
 
 // Sign up
-if (document.querySelector("#signupForm"))
-{
+if (document.querySelector("#signupForm")) {
 	const signupForm = document.querySelector("#signupForm")
 	signupForm.addEventListener("submit", function(event) {
 		// Prevent page refresh
