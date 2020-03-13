@@ -23,7 +23,8 @@ const promise1 = new Promise(function(resolve, reject) {
 				let name = document.getElementById("closetName");
 				name.innerHTML = user.email.split("@")[0] + "'s Closet"
                     // Update selected, image, and submit buttons when clicked/changed
-                setInterval(function() {
+				if(document.getElementById("type")){
+					setInterval(function() {
                         var selected = document.getElementById("type")
                         selectedValue = selected.options[selected.selectedIndex].value;
                         selected.addEventListener("change", (s) => {
@@ -37,6 +38,7 @@ const promise1 = new Promise(function(resolve, reject) {
                             })
                         }
                     }, 1)
+				}
                     // If user isn't logged in disable uploading
             } else {
                 console.log("User logged out")
@@ -44,13 +46,19 @@ const promise1 = new Promise(function(resolve, reject) {
         })
         // Callback function to return email. Used to access respective database
 }).then(function(value) {
-    document.getElementById("all").addEventListener("click", function() { allButton(value) })
-    document.getElementById("shirts").addEventListener("click", function() { shirts(value) })
-    document.getElementById("pants").addEventListener("click", function() { pants(value) })
-    document.getElementById("outerwear").addEventListener("click", function() { outerwear(value) })
-    document.getElementById("accessories").addEventListener("click", function() { accessories(value) })
-    document.getElementById("footwear").addEventListener("click", function() { footwear(value) })
-    document.getElementById("hats").addEventListener("click", function() { hats(value) })
+	if(document.getElementById("all")){
+		document.getElementById("all").addEventListener("click", function() { allButton(value) })
+		document.getElementById("shirts").addEventListener("click", function() { shirts(value) })
+		document.getElementById("pants").addEventListener("click", function() { pants(value) })
+		document.getElementById("outerwear").addEventListener("click", function() { outerwear(value) })
+		document.getElementById("accessories").addEventListener("click", function() { accessories(value) })
+		document.getElementById("footwear").addEventListener("click", function() { footwear(value) })
+		document.getElementById("hats").addEventListener("click", function() { hats(value) })
+	}
+	if (document.getElementById("createO")){
+		document.getElementById("createO").addEventListener("click", function() { createOutfit(value) })
+		displayOutfitChoices(value);
+	}
 })
 
 // Sign up
@@ -76,28 +84,34 @@ if (document.querySelector("#signupForm"))
 }
 
 // Sign out
-const logout = document.querySelector("#logout")
-logout.addEventListener("click", function(event) {
-    event.preventDefault
-    auth.signOut().then(function() {
-        console.log("User signed out")
-    }).catch(function(error) {
-        console.log(error.message)
-    })
-})
-
+if (document.getElementById("logout")) {
+	
+	const logout = document.querySelector("#logout")
+	logout.addEventListener("click", function(event) {
+		let name = document.getElementById("closetName");
+		name.innerHTML = "Jhusthin's Closet";
+		event.preventDefault
+		auth.signOut().then(function() {
+			console.log("User signed out")
+		}).catch(function(error) {
+			console.log(error.message)
+		})
+	})
+}
 // Log in
-const loginForm = document.querySelector("#loginForm")
-loginForm.addEventListener("submit", function(event) {
-    event.preventDefault()
-
-    const email = loginForm["signin-email"].value;
-    const pass = loginForm["signin-pass"].value;
-
-    auth.signInWithEmailAndPassword(email, pass).then(function(credential) {
-        console.log("User has logged in")
-        console.log(credential.user)
-    }).catch(error => {
-        console.log(error.message)
-    })
-})
+if (document.querySelector("#loginForm")){
+	const loginForm = document.querySelector("#loginForm")
+	loginForm.addEventListener("submit", function(event) {
+		event.preventDefault()
+	
+		const email = loginForm["signin-email"].value;
+		const pass = loginForm["signin-pass"].value;
+	
+		auth.signInWithEmailAndPassword(email, pass).then(function(credential) {
+			console.log("User has logged in")
+			console.log(credential.user)
+		}).catch(error => {
+			console.log(error.message)
+		})
+	})
+}

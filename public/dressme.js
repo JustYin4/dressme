@@ -23,6 +23,58 @@ function addClothes() {
 	document.querySelector(".pictures").style.display = "None";
 }
 
+function displayOutfitChoices(user){
+	var allPictures = document.querySelector(".pictures");
+    allPictures.innerHTML = "";
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "all").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            picture.className = "img";
+			picture.style.borderColor = "black";
+			picture.style.borderStyle = "solid";
+			picture.style.borderWidths = "1px";
+			picture.addEventListener("click", selectedPicture);
+            allPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
+}
+
+function selectedPicture(){
+	if (this.style.borderColor == "blue"){
+		this.style.borderColor = "black";
+	}
+	else {
+		this.style.borderColor = "blue";
+	}
+}
+
+function createOutfit(user){
+	let selected = [];
+	let pictures = document.querySelector(".pictures").childNodes;
+	for (let i = 0; i < pictures.length; i++){
+		let pic = pictures[i];
+		if (pic.style.borderColor == "blue"){
+			selected.push(pic);
+		}
+	}
+	if (selected.length == 0){
+		alert("You did not select any clothes. Please try again.");
+		return
+	}
+	let outfitName = prompt("What would you like to call this outfit?", "Outfit");
+	return selected
+}
+
 // Event listeners that call a request chain for getting the proper clothing
 function allButton(user) {
     var allPictures = document.querySelector(".pictures");
