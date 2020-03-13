@@ -44,6 +44,12 @@ h1 {
     text-align: center;
 }
 
+span {
+    font: 20px calibri;
+    color: #777;
+    font-weight: bold;
+}
+
 
 
 /* outfit.html only*/
@@ -120,4 +126,10 @@ img {
 .pictures {
     background-size:cover;
     background-position:center;
+}
+
+/* labels for registration and login */
+label {
+    font: 14px calibri;
+    color: #777;
 }

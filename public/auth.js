@@ -84,20 +84,18 @@ if (document.querySelector("#signupForm"))
 }
 
 // Sign out
-if (document.getElementById("logout")) {
-	
-	const logout = document.querySelector("#logout")
-	logout.addEventListener("click", function(event) {
-		let name = document.getElementById("closetName");
-		name.innerHTML = "Jhusthin's Closet";
-		event.preventDefault
-		auth.signOut().then(function() {
-			console.log("User signed out")
-		}).catch(function(error) {
-			console.log(error.message)
-		})
-	})
-}
+const logout = document.querySelector("#logout")
+logout.addEventListener("click", function(event) {
+    event.preventDefault
+    auth.signOut().then(function() {
+        console.log("User signed out")
+    }).catch(function(error) {
+        console.log(error.message)
+    })
+    document.getElementById("signin-email").value = "";
+    document.getElementById("signin-pass").value = "";
+})
+
 // Log in
 if (document.querySelector("#loginForm")){
 	const loginForm = document.querySelector("#loginForm")
