@@ -17,7 +17,7 @@ window.onload = function() {
 		document.getElementById("upload").style.display = "None";
 	}
 }
-function addClothes() {
+function addClothes(user) {
 	document.getElementById("upload").style.display = "inline";
 	document.getElementById("show").style.display = "None";
 	document.querySelector(".pictures").style.display = "None";
