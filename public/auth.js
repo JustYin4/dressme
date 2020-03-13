@@ -10,8 +10,6 @@
   File: auth.js
   Purpose: Commnicates with a firebase database and retrieves images
 */
-
-const signupForm = document.querySelector("#signupForm")
 auth = firebase.auth()
 
 
@@ -56,22 +54,26 @@ const promise1 = new Promise(function(resolve, reject) {
 })
 
 // Sign up
-signupForm.addEventListener("submit", function(event) {
-    // Prevent page refresh
-    event.preventDefault()
+if (document.querySelector("#signupForm"))
+{
+	const signupForm = document.querySelector("#signupForm")
+	signupForm.addEventListener("submit", function(event) {
+		// Prevent page refresh
+		event.preventDefault()
 
-    // Get user info
-    const email = signupForm["signup-email"].value
-    const pass = signupForm["signup-pass"].value
+		// Get user info
+		const email = signupForm["signup-email"].value
+		const pass = signupForm["signup-pass"].value
 
-    // Initialize and create user
-    auth.createUserWithEmailAndPassword(email, pass).then(function(credential) {
-        console.log("User created an account")
-        console.log(credential.user)
-    }).catch(function(error) {
-        console.log(error.message)
-    })
-})
+		// Initialize and create user
+		auth.createUserWithEmailAndPassword(email, pass).then(function(credential) {
+			console.log("User created an account")
+			console.log(credential.user)
+		}).catch(function(error) {
+			console.log(error.message)
+		})
+	})
+}
 
 // Sign out
 const logout = document.querySelector("#logout")

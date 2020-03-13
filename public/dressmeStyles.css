@@ -31,24 +31,92 @@ h1 {
 
 /* index.html */
 #create {
-    border: .75px solid #777;
+    border: .75px solid #d3d3d3;
     background-color: white;
 }
 
 #add {
-    border: .75px solid #777;
+    border: .75px solid #d3d3d3;
     background-color: white;
+}
+
+#loginForm{
+    text-align: center;
 }
 
 
 
 /* outfit.html only*/
-#back {
+
+#backHome {
     border: .75px solid #777;
+=======
+#back {
+    border: .75px solid #d3d3d3;
+
     background-color: white;
 }
 
 #createO {
     border: .75px solid #777;
     background-color: white;
+}
+
+
+/* register.html only*/
+
+#websiteName {
+    font-size: 60px;
+}
+
+#RHome {
+    padding: 10px;
+}
+
+#GoHome {
+    border: .75px solid #777;
+    background-color: white;
+}
+
+.input-field {
+    padding: 10px;
+}
+
+#reg{
+    padding: 10px;
+}
+
+#registerHome {
+    font: 14px calibri;
+    color: #777;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: .75px solid #777;
+    background-color: white;
+}
+
+=======
+/* for images */
+img {
+    border-radius:2px;
+    padding: 15px;
+    margin: 10px;
+    background-color: #fff;
+    display: inline-block;
+}
+
+.img {
+    width:175px;
+    height:175px;
+    object-fit:cover;
+}
+
+.pictures {
+    background-size:cover;
+    background-position:center;
 }

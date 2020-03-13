@@ -27,7 +27,7 @@ function addClothes() {
 function allButton(user) {
     var allPictures = document.querySelector(".pictures");
     allPictures.innerHTML = "";
-    sendGet("all");
+    sendGet("All");
 
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
@@ -39,6 +39,7 @@ function allButton(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
+            picture.className = "img"
             allPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -181,7 +182,7 @@ function hats(user) {
 function others(user) {
     var otherPictures = document.querySelector(".pictures");
     otherPictures.innerHTML = "";
-    sendGet("others");
+    sendGet("Others");
 
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
