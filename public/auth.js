@@ -84,6 +84,8 @@ logout.addEventListener("click", function(event) {
     }).catch(function(error) {
         console.log(error.message)
     })
+    document.getElementById("signin-email").value = "";
+    document.getElementById("signin-pass").value = "";
 })
 
 // Log in
