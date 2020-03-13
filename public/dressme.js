@@ -5,7 +5,7 @@
              Cameron Fritz
   
   Date Created: 3/3/2020
-  Last Updated: 3/10/2020
+  Last Updated: 3/13/2020
   
   File: dressme.js
   Purpose: Event listeners and scripts to communicate with the dressme server
@@ -13,12 +13,14 @@
 
 // Makes sure that event listeners are added after the web page is loaded
 window.onload = function() {
-	document.getElementById("upload").style.display = "None";
+	if (document.getElementById("upload")){
+		document.getElementById("upload").style.display = "None";
+	}
 }
 function addClothes() {
 	document.getElementById("upload").style.display = "inline";
 	document.getElementById("show").style.display = "None";
-	// document.getElementById("pictureSection").style.display = "None";
+	document.querySelector(".pictures").style.display = "None";
 }
 
 // Event listeners that call a request chain for getting the proper clothing
@@ -44,34 +46,159 @@ function allButton(user) {
     })
 }
 
-function shirts() {
-    sendGet("shirts");
+function shirts(user) {
+    var shirtPictures = document.querySelector(".pictures");
+    shirtPictures.innerHTML = "";
+    sendGet("Shirts");
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "shirts").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            shirtPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
 }
 
-function pants() {
-    sendGet("pants");
+function pants(user) {
+    var pantPictures = document.querySelector(".pictures");
+    pantPictures.innerHTML = "";
+    sendGet("Pants");
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "pants").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            pantPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
 }
 
-function outerwear() {
-    sendGet("outerwear");
+function outerwear(user) {
+    var outerwearPictures = document.querySelector(".pictures");
+    outerwearPictures.innerHTML = "";
+    sendGet("Outerwear");
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "outerwear").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            outerwearPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
 }
 
-function accessories() {
-    sendGet("accessories");
+function accessories(user) {
+    var accessPictures = document.querySelector(".pictures");
+    accessPictures.innerHTML = "";
+    sendGet("Accessories");
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "accessories").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            accessPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
 }
 
-function footwear() {
-    sendGet("footwear");
+function footwear(user) {
+    var footPictures = document.querySelector(".pictures");
+    footPictures.innerHTML = "";
+    sendGet("Footwear");
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "footwear").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            footPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
 }
 
-function hats() {
-    sendGet("hats");
+function hats(user) {
+    var hatPictures = document.querySelector(".pictures");
+    hatPictures.innerHTML = "";
+    sendGet("Hats");
+
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "hats").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            hatPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
 }
 
-function others() {
+function others(user) {
+    var otherPictures = document.querySelector(".pictures");
+    otherPictures.innerHTML = "";
     sendGet("others");
-}
 
+    removeDomain = user.substring(0, user.lastIndexOf("@"));
+    removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
+    user = removeSpecialChar;
+
+
+    retrieve(user, "Others").then(function(result) {
+        for (i=0; i<result.length; i++) {
+            image = result[i];
+            var picture = document.createElement("img");
+            picture.src = image;
+            otherPictures.appendChild(picture);
+        }
+    }).catch(function(error) {
+        console.log(error)
+    })
+}
 
 // Sends the request to the server
 function sendGet(clothType) {
@@ -85,7 +212,6 @@ function sendGet(clothType) {
 }
 
 // Updates the show with the response
-// TODO: Update with pictures
 function updateShow() {
     let display = document.getElementById("show");
     display.innerHTML = this.response;

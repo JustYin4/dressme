@@ -1,3 +1,16 @@
+/* 
+  Author(s): Jacy Yu,
+             Justin Yin,
+             Yi Yang,
+             Cameron Fritz
+  
+  Date Created: 3/12/2020
+  Last Updated: 3/13/2020
+  
+  File: auth.js
+  Purpose: Commnicates with a firebase database and retrieves images
+*/
+
 const signupForm = document.querySelector("#signupForm")
 auth = firebase.auth()
 
@@ -9,6 +22,8 @@ const promise1 = new Promise(function(resolve, reject) {
             if (user) {
                 console.log("User logged in")
                 resolve(user.email)
+				let name = document.getElementById("closetName");
+				name.innerHTML = user.email.split("@")[0] + "'s Closet"
                     // Update selected, image, and submit buttons when clicked/changed
                 setInterval(function() {
                         var selected = document.getElementById("type")
