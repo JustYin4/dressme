@@ -25,54 +25,42 @@ function addClothes(user) {
 }
 
 function displayOutfitChoices(user){
-	var allPictures = document.querySelector(".pictures");
-    allPictures.innerHTML = "";
-
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
     user = removeSpecialChar;
 
-    retrieve(user, "all").then(function(result) {
-        for (i=0; i<result.length; i++) {
-            image = result[i];
-            var picture = document.createElement("img");
-            picture.src = image;
-            picture.className = "img";
-			picture.style.borderColor = "black";
-			picture.style.borderStyle = "solid";
-			picture.style.borderWidths = "1px";
-			picture.addEventListener("click", selectedPicture);
-            allPictures.appendChild(picture);
-        }
-    }).catch(function(error) {
-        console.log(error)
-    })
-}
+    retrieveBranchNames(user)
 
-function selectedPicture(){
-	if (this.style.borderColor == "blue"){
-		this.style.borderColor = "black";
-	}
-	else {
-		this.style.borderColor = "blue";
-	}
-}
+    // for (i=0; i<user.length; i++) {
+    //     image = result[i];
+    //     var picture = document.createElement("img");
+    //     picture.src = image;
+    //     picture.className = "img";
+    //     picture.style.borderColor = "black";
+    //     picture.style.borderStyle = "solid";
+    //     picture.style.borderWidths = "1px";
+    //     picture.addEventListener("click", selectedPicture);
+    //     allPictures.appendChild(picture);
+    // }
 
-function createOutfit(user){
-	let selected = [];
-	let pictures = document.querySelector(".pictures").childNodes;
-	for (let i = 0; i < pictures.length; i++){
-		let pic = pictures[i];
-		if (pic.style.borderColor == "blue"){
-			selected.push(pic);
-		}
-	}
-	if (selected.length == 0){
-		alert("You did not select any clothes. Please try again.");
-		return
-	}
-	let outfitName = prompt("What would you like to call this outfit?", "Outfit");
-	return selected
+	// var allPictures = document.querySelector(".pictures");
+    // allPictures.innerHTML = "";
+
+    // retrieve(user, "outfits").then(function(result) {
+    //     for (i=0; i<result.length; i++) {
+    //         image = result[i];
+    //         var picture = document.createElement("img");
+    //         picture.src = image;
+    //         picture.className = "img";
+	// 		picture.style.borderColor = "black";
+	// 		picture.style.borderStyle = "solid";
+	// 		picture.style.borderWidths = "1px";
+	// 		picture.addEventListener("click", selectedPicture);
+    //         allPictures.appendChild(picture);
+    //     }
+    // }).catch(function(error) {
+    //     console.log(error)
+    // })
 }
 
 // Event listeners that call a request chain for getting the proper clothing
@@ -359,5 +347,25 @@ function retrieve(user, choice) {
         } catch (error) {
             reject(error)
         }
+    })
+}
+
+function retrieveBranchNames(user) {
+    return new Promise(function(resolve, reject) {
+        var db = firebase.database().ref().child(user + "/outfits/");
+        db.once("value", function(snapshot) {
+            snapshot.forEach(branchSnapshot => {
+                resolve(branchSnapshot.key)
+            })
+        })
+    }).then(function(value) {
+        var allOutfits = document.querySelector("#chosenOutfit");
+
+        for (i=0; i<value[i]; i++) {
+            branch = value[i];
+            var newBranch = document.createElement("option");
+            newBranch.value = branch
+            allOutfits.appendChild(newBranch);
+        }   
     })
 }

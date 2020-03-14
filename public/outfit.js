@@ -1,7 +1,7 @@
 value = localStorage["user"]
 console.log(value) 
 
-function createOutfit(value){
+function createOutfit(value){ 
     let selected = []
     let pictures = document.querySelector(".pictures").childNodes;
 	for (let i = 0; i < pictures.length; i++){
