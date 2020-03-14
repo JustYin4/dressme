@@ -57,14 +57,10 @@ span {
 
 /* outfit.html only*/
 
-#backHome {
-    border: .75px solid #777;
-}
-
 #back {
-    border: .75px solid #d3d3d3;
-
+    border: .75px solid #777;
     background-color: white;
+    margin-right: 10px;
 }
 
 #createO {
@@ -77,6 +73,13 @@ span {
 
 #websiteName {
     font-size: 60px;
+    padding: 0px;
+}
+
+#infoR {
+    font-size: 30px;
+    padding: 5px;
+    color: #fff;
 }
 
 #RHome {
@@ -88,12 +91,18 @@ span {
     background-color: white;
 }
 
-.input-field {
+.input-fieldR {
     padding: 10px;
+    display: block;
+}
+
+.input-fieldR label{
+    padding: 10px;
+    display: block;
 }
 
 #reg{
-    padding: 10px;
+    padding: 30px;
 }
 
 #registerHome {
@@ -109,6 +118,31 @@ span {
     border: .75px solid #777;
     background-color: white;
 }
+
+#backgroundR {
+    background:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url(./closet.jfif);
+    background-color: #cccccc;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center;
+    border: 3.5px solid #777;
+    position: relative;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    padding-top: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 100px;
+}
+
+#content {
+    position: center;
+}
+
 
 /* for images */
 img {
@@ -129,6 +163,7 @@ img {
     background-size:cover;
     background-position:center;
 }
+
 
 /* labels for registration and login */
 label {

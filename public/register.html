@@ -21,31 +21,39 @@
 <body>
     <h1 id="websiteName">DressMe</h1>
 
-    <div id="modal-signup" class="modal">
-        <div class="modal-content">
-        <form id="signupForm">
-                <div class="input-field">
-                    <label for="signup-email">Email Address</label>
-                    <input type="email" id="signup-email" required>
+    <div id="backgroundR">
+        <div id="content">
+        <div id="modal-signup" class="modal">
+            <div class="modal-content">
+            <form id="signupForm">
+                    <div class="input-fieldR">
+                        <label for="signup-email" style="color: white; font-size: 16px;">Email Address:</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="input-fieldR">
+                        <label for="signup-pass" style="color: white; font-size: 16px;">Enter Password:</label>
+                        <input type="password" id="signup-pass" required>
+                    </div>
                 </div>
-                <div class="input-field">
-                    <label for="signup-pass">Enter Password</label>
-                    <input type="password" id="signup-pass" required>
-                </div>
-            </div>
 
-            <div id="reg">
-                <button type="button" id="registerHome"> Register </button>
-            </div>
-        </form>
+                <div id="reg">
+                    <button type="button" id="registerHome"> Register </button>
+                </div>
+            </form>
+        </div>
+    
+
+        <div id="RHome">
+            <a href="index.html">
+                <button id="GoHome" class="buttons"> Home </button>
+            </a>
+        </div>
+        </div>
+        <h1 id="infoR">Your closet, right in your pocket accessible at anywhere and anytime!</h1>
     </div>
 
-    <div id="RHome">
-        <a href="index.html">
-            <button id="GoHome" class="buttons"> Home </button>
-        </a>
-    </div>
-	
+    
+    
 	<!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-storage.js"></script>
