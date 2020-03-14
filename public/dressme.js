@@ -17,6 +17,7 @@ window.onload = function() {
 		document.getElementById("upload").style.display = "None";
 	}
 }
+
 function addClothes(user) {
 	document.getElementById("upload").style.display = "inline";
 	document.getElementById("show").style.display = "None";
@@ -30,7 +31,6 @@ function displayOutfitChoices(user){
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
     user = removeSpecialChar;
-
 
     retrieve(user, "all").then(function(result) {
         for (i=0; i<result.length; i++) {
@@ -160,7 +160,7 @@ function outerwear(user) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
-            picture.className = "img"
+            picture.className = "img";
             outerwearPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -318,24 +318,24 @@ function upload(user, selectedVal, image, imageName) {
             ref.child(user).once("value", gotUserData);
 
             function gotUserData(snapshot) {
+                // If image doesn't exist, create the branches
                 if (!snapshot.exists()) {
                     updates["/" + user + "/" + selectedVal + "/" + postKey] = postData;
                     updates["/" + user + "/all/" + postKey] = postData;
                     firebase.database().ref().update(updates)
                 }
+                // Go through each branch and check if the image name already exists
                 snapshot.forEach(userSnapshot => {
                     if (rawImageName === userSnapshot.key) {
                         updates["/" + selectedVal + "/" + postKey] = postData;
                         firebase.database().ref().update(updates)
-                        console.log("goes here")
                     } else {
                         updates["/" + user + "/all/" + postKey] = postData;
                         firebase.database().ref().update(updates)
                         updates["/" + user + "/" + selectedVal + "/" + postKey] = postData;
                         firebase.database().ref().update(updates)
-                        console.log("goes here")
                     }
-                })
+                })   
             }
         });
     });

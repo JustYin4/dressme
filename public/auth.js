@@ -18,51 +18,51 @@ const promise1 = new Promise(function(resolve, reject) {
     auth.onAuthStateChanged((user) => {
             // If user is logged in, enable uploading and retriving
             if (user) {
-                console.log("User logged in")
+				console.log("User logged in")
+				localStorage["user"] = user.email
                 resolve(user.email)
 				if (document.getElementById("closetName")){
 					let name = document.getElementById("closetName");
-					name.innerHTML = user.email.split("@")[0] + "'s Closet"
+					name.innerHTML = user.email.split("@")[0] + "'s Closet";
                 }
 				// Update selected, image, and submit buttons when clicked/changed
-				if(document.getElementById("type")){
 					setInterval(function() {
                         var selected = document.getElementById("type")
                         selectedValue = selected.options[selected.selectedIndex].value;
                         selected.addEventListener("change", (s) => {
                             return selectedValue = selected.options[selected.selectedIndex].value;
-                        })
-                        document.getElementById("image").onchange = (updateImageValue) => {
-                            var image = document.getElementById("image").files[0];
-                            var imageName = document.getElementById("image").files[0].name;
-                            document.getElementById("addItem").addEventListener("click", (addItem) => {
-                                upload(user.email, selectedValue, image, imageName)
-                            })
-                        }
-                    }, 1)
-				}
-                    // If user isn't logged in disable uploading
+						})}, 1)
+					
+					setInterval(function() {
+						return image = document.getElementById("image").files[0];
+					}, 1)
+
+					setInterval(function() {
+						document.getElementById("image").onchange = (updateImageValue) => {
+							var image = document.getElementById("image").files[0];
+                            return imageName = document.getElementById("image").files[0].name;
+					}}, 1)
+
+					document.getElementById("addItem").addEventListener("click", (addItem) => {
+						upload(user.email, selectedValue, image, imageName);
+					})
+
+            // If user isn't logged in disable uploading
             } else {
-                console.log("User logged out")
-            }
-        })
+                console.log("User logged out");
+            }})
         // Callback function to return email. Used to access respective database
 }).then(function(value) {
-	if(document.getElementById("all")){
-		document.getElementById("add").addEventListener("click", function() { addClothes(value) })
-		document.getElementById("all").addEventListener("click", function() { allButton(value) })
-		document.getElementById("shirts").addEventListener("click", function() { shirts(value) })
-		document.getElementById("pants").addEventListener("click", function() { pants(value) })
-		document.getElementById("outerwear").addEventListener("click", function() { outerwear(value) })
-		document.getElementById("accessories").addEventListener("click", function() { accessories(value) })
-		document.getElementById("footwear").addEventListener("click", function() { footwear(value) })
-		document.getElementById("hats").addEventListener("click", function() { hats(value) })
-		document.getElementById("others").addEventListener("click", function() { others(value) })
-	}
-	if (document.getElementById("createO")){
-		document.getElementById("createO").addEventListener("click", function() { createOutfit(value) })
-		displayOutfitChoices(value);
-	}
+	document.getElementById("add").addEventListener("click", function() { addClothes(value) });
+	document.getElementById("all").addEventListener("click", function() { allButton(value) });
+	document.getElementById("shirts").addEventListener("click", function() { shirts(value) });
+	document.getElementById("pants").addEventListener("click", function() { pants(value) });
+	document.getElementById("outerwear").addEventListener("click", function() { outerwear(value) });
+	document.getElementById("accessories").addEventListener("click", function() { accessories(value) });
+	document.getElementById("footwear").addEventListener("click", function() { footwear(value) });
+	document.getElementById("hats").addEventListener("click", function() { hats(value) });
+	document.getElementById("others").addEventListener("click", function() { others(value) });
+	document.getElementById("outfits").addEventListener("click", function() { displayOutfitChoices(value) });
 })
 
 // Sign up
@@ -70,18 +70,18 @@ if (document.querySelector("#signupForm")) {
 	const signupForm = document.querySelector("#signupForm")
 	signupForm.addEventListener("submit", function(event) {
 		// Prevent page refresh
-		event.preventDefault()
+		event.preventDefault();
 
 		// Get user info
-		const email = signupForm["signup-email"].value
-		const pass = signupForm["signup-pass"].value
+		const email = signupForm["signup-email"].value;
+		const pass = signupForm["signup-pass"].value;
 
 		// Initialize and create user
 		auth.createUserWithEmailAndPassword(email, pass).then(function(credential) {
-			console.log("User created an account")
-			console.log(credential.user)
+			console.log("User created an account");
+			console.log(credential.user);
 		}).catch(function(error) {
-			console.log(error.message)
+			console.log(error.message);
 		})
 	})
 }
@@ -93,11 +93,11 @@ if (document.getElementById("logout")) {
 	logout.addEventListener("click", function(event) {
 		let name = document.getElementById("closetName");
 		name.innerHTML = "Jhusthin's Closet";
-		event.preventDefault
+		location.reload(event)
 		auth.signOut().then(function() {
-			console.log("User signed out")
+			console.log("User signed out");
 		}).catch(function(error) {
-			console.log(error.message)
+			console.log(error.message);
 		})
 	})
 }
