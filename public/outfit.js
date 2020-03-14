@@ -55,7 +55,6 @@ allButton(value)
 create = document.getElementById("createOutfit")
 create.addEventListener("click", function() { createOutfit(value) })
 
-
 function upload(user, imageList, outfitName) {
     // Strip email
     removeDomain = user.substring(0, user.lastIndexOf("@"));
@@ -66,34 +65,22 @@ function upload(user, imageList, outfitName) {
 
     // Format parameters
     for (i=0; i<imageList.length; i++) {
-        console.log(i)
 
-        var postKey = firebase.database().ref(user + "/outfits/" + outfitName + "/" + i).key;
-        var updates = {};
-        var postData = {
+        removeExtra = imageList[i].substring(imageList[i].length - 10, imageList[i].length)
+
+        let postKey = firebase.database().ref(user + "/outfits/" + outfitName + "/" + removeExtra).key;
+        let updates = {};
+        let postData = {
             url: imageList[i],
             name: i
         };
-        console.log(imageList)
+        // console.log(imageList[i], i)
 
-        // Check if image already exists in all folder
         var ref = firebase.database().ref()
-        ref.child(user + "/outfits").once("value", gotUserData);
-
-        function gotUserData(snapshot) {
-            // If image doesn't exist, create the branches
-            if (!snapshot.exists()) {
-                updates["/" + user + "/outfits/" + outfitName + "/" + postKey] = postData;
-                firebase.database().ref().update(updates)
-            }
-            snapshot.forEach(userSnapshot => {
-                if (i === userSnapshot.key) {
-                    updates["/" + user + "/outfits/" + outfitName + "/" + postKey] = postData;
-                    firebase.database().ref().update(updates)
-                } else {
-                    updates["/" + user + "/outfits/" + outfitName + "/" + postKey] = postData;
-                    firebase.database().ref().update(updates)
-                }
-            })
+        ref.child(user).once("value", gotUserData);
+        function gotUserData() {
+            updates["/" + user + "/outfits/" + outfitName + "/" + postKey] = postData;
+            firebase.database().ref().update(updates)
         }
-    }}
+    }
+}
