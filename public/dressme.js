@@ -13,54 +13,44 @@
 
 // Makes sure that event listeners are added after the web page is loaded
 window.onload = function() {
-	if (document.getElementById("upload")){
-		document.getElementById("upload").style.display = "None";
-	}
+    if (document.getElementById("upload")) {
+        document.getElementById("upload").style.display = "None";
+    }
 }
 
 function addClothes(user) {
-	document.getElementById("upload").style.display = "inline";
-	document.getElementById("show").style.display = "None";
-	document.querySelector(".pictures").style.display = "None";
+    document.getElementById("upload").style.display = "inline";
+    document.getElementById("show").style.display = "None";
+    document.querySelector(".pictures").style.display = "None";
 }
 
-function displayOutfitChoices(user){
+function displayOutfitChoices(user) {
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
     user = removeSpecialChar;
 
     retrieveBranchNames(user)
-
-    // for (i=0; i<user.length; i++) {
-    //     image = result[i];
-    //     var picture = document.createElement("img");
-    //     picture.src = image;
-    //     picture.className = "img";
-    //     picture.style.borderColor = "black";
-    //     picture.style.borderStyle = "solid";
-    //     picture.style.borderWidths = "1px";
-    //     picture.addEventListener("click", selectedPicture);
-    //     allPictures.appendChild(picture);
-    // }
-
-	// var allPictures = document.querySelector(".pictures");
-    // allPictures.innerHTML = "";
-
-    // retrieve(user, "outfits").then(function(result) {
-    //     for (i=0; i<result.length; i++) {
-    //         image = result[i];
-    //         var picture = document.createElement("img");
-    //         picture.src = image;
-    //         picture.className = "img";
-	// 		picture.style.borderColor = "black";
-	// 		picture.style.borderStyle = "solid";
-	// 		picture.style.borderWidths = "1px";
-	// 		picture.addEventListener("click", selectedPicture);
-    //         allPictures.appendChild(picture);
-    //     }
-    // }).catch(function(error) {
-    //     console.log(error)
-    // })
+    document.getElementById("getOutfit").addEventListener("click", retrieveImages => {
+        selected = document.getElementById("chosenOutfit")
+        selectedVal = selected.options[selected.selectedIndex].value
+        var allPictures = document.querySelector(".pictures");
+        allPictures.innerHTML = "";
+        retrieveOutfits(user, selectedVal).then(function(result) {
+            console.log(result)
+            for (i = 0; i < result.length; i++) {
+                image = result[i];
+                var picture = document.createElement("img");
+                picture.src = image;
+                picture.className = "img";
+                picture.style.borderColor = "black";
+                picture.style.borderStyle = "solid";
+                picture.style.borderWidths = "1px";
+                allPictures.appendChild(picture);
+            }
+        }).catch(function(error) {
+            console.log(error)
+        })
+    })
 }
 
 // Event listeners that call a request chain for getting the proper clothing
@@ -75,7 +65,7 @@ function allButton(user) {
 
 
     retrieve(user, "all").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -98,7 +88,7 @@ function shirts(user) {
 
 
     retrieve(user, "shirts").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -121,7 +111,7 @@ function pants(user) {
 
 
     retrieve(user, "pants").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -144,7 +134,7 @@ function outerwear(user) {
 
 
     retrieve(user, "outerwear").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -167,7 +157,7 @@ function accessories(user) {
 
 
     retrieve(user, "accessories").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -190,7 +180,7 @@ function footwear(user) {
 
 
     retrieve(user, "footwear").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -213,7 +203,7 @@ function hats(user) {
 
 
     retrieve(user, "hats").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -236,7 +226,7 @@ function others(user) {
 
 
     retrieve(user, "Others").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -250,9 +240,9 @@ function others(user) {
 
 // Sends the request to the server
 function sendGet(clothType) {
-	document.getElementById("upload").style.display = "None";
-	document.getElementById("show").style.display = "inline";
-	document.querySelector(".pictures").style.display = "inline";
+    document.getElementById("upload").style.display = "None";
+    document.getElementById("show").style.display = "inline";
+    document.querySelector(".pictures").style.display = "inline";
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", updateShow);
     xhr.open("GET", "http://localhost:8080/test?clothType=" + clothType);
@@ -280,7 +270,7 @@ function upload(user, selectedVal, image, imageName) {
     }
 
     console.log(user, selectedVal, image, imageName)
-    // Option to add later: fixing unintended overwrite when using 2 of the same image names
+        // Option to add later: fixing unintended overwrite when using 2 of the same image names
 
     uploadTask.on("state_changed", function(snapshot) {
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -323,7 +313,7 @@ function upload(user, selectedVal, image, imageName) {
                         updates["/" + user + "/" + selectedVal + "/" + postKey] = postData;
                         firebase.database().ref().update(updates)
                     }
-                })   
+                })
             }
         });
     });
@@ -333,6 +323,7 @@ function retrieve(user, choice) {
     return new Promise(function(resolve, reject) {
         try {
             var db = firebase.database().ref().child(user + "/" + choice);
+            console.log(db)
             db.once("value", pics => {
                 if (!pics.exists()) {
                     resolve([])
@@ -353,19 +344,44 @@ function retrieve(user, choice) {
 function retrieveBranchNames(user) {
     return new Promise(function(resolve, reject) {
         var db = firebase.database().ref().child(user + "/outfits/");
+        let branches = []
         db.once("value", function(snapshot) {
             snapshot.forEach(branchSnapshot => {
-                resolve(branchSnapshot.key)
+                branches.push(branchSnapshot.key)
             })
+            resolve(branches)
         })
     }).then(function(value) {
         var allOutfits = document.querySelector("#chosenOutfit");
-
-        for (i=0; i<value[i]; i++) {
+        for (i = 0; i < value.length; i++) {
             branch = value[i];
             var newBranch = document.createElement("option");
             newBranch.value = branch
+            newBranch.text = branch
             allOutfits.appendChild(newBranch);
-        }   
+        }
+    })
+}
+
+
+function retrieveOutfits(user, choice) {
+    return new Promise(function(resolve, reject) {
+        try {
+            var db = firebase.database().ref().child(user + "/outfits/" + choice);
+            console.log(db)
+            db.once("value", pics => {
+                if (!pics.exists()) {
+                    resolve([])
+                } else {
+                    var picHtml = []
+                    pics.forEach(pic => {
+                        picHtml.push(pic.val().url)
+                    })
+                    resolve(picHtml)
+                }
+            })
+        } catch (error) {
+            reject(error)
+        }
     })
 }
