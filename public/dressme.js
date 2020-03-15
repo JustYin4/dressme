@@ -48,7 +48,7 @@ function displayOutfitChoices(user) {
                 var picture = document.createElement("img");
                 picture.src = image;
                 picture.className = "img";
-                picture.style.borderColor = "black";
+                picture.style.borderColor = "lightgray";
                 picture.style.borderStyle = "solid";
                 picture.style.borderWidths = "1px";
                 allPictures.appendChild(picture);
