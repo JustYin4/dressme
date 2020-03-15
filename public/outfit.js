@@ -6,7 +6,7 @@ function createOutfit(value){
     let pictures = document.querySelector(".pictures").childNodes;
 	for (let i = 0; i < pictures.length; i++){
         let pic = pictures[i];
-		if (pic.style.backgroundColor == "red") {
+		if (pic.style.backgroundColor == "#777") {
             selected.push(pic.src)
 		}
     }
@@ -20,7 +20,7 @@ function createOutfit(value){
 
 function selectImage() {
     if (this.style.backgroundColor == 'white') {
-        this.style.backgroundColor = 'red'
+        this.style.backgroundColor = "#777";
     } else {
         this.style.backgroundColor = 'white'
     }
