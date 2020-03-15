@@ -16,6 +16,9 @@ window.onload = function() {
     if (document.getElementById("upload")) {
         document.getElementById("upload").style.display = "None";
     }
+    if (document.getElementById("chooseOutfit")) {
+        document.getElementById("chooseOutfit").style.display = "None";
+    }
 }
 
 function addClothes(user) {
@@ -25,6 +28,7 @@ function addClothes(user) {
 }
 
 function displayOutfitChoices(user) {
+    document.getElementById("chooseOutfit").style.display = "inline";
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
     user = removeSpecialChar;
