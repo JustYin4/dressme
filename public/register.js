@@ -1,6 +1,21 @@
 auth = firebase.auth()
 console.log("Connected to register.js")
 
+// Sign out
+const logout = document.querySelector("#logout")
+var register = document.getElementById("registerHome")
+register.addEventListener("click", function(event) {
+    event.preventDefault
+    auth.signOut().then(function() {
+        console.log("User signed out")
+    }).catch(function(error) {
+        console.log(error.message)
+    })
+    document.getElementById("signin-email").value = "";
+    document.getElementById("signin-pass").value = "";
+})
+
+
 // Sign up
 if (document.querySelector("#signupForm")) {
     const signupForm = document.querySelector("#signupForm")
