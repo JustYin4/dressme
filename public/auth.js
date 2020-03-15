@@ -66,19 +66,6 @@ const promise1 = new Promise(function(resolve, reject) {
 	document.getElementById("outfits").addEventListener("click", function() { displayOutfitChoices(value) });
 })
 
-// Sign out
-const logout = document.querySelector("#logout")
-logout.addEventListener("click", function(event) {
-    event.preventDefault
-    auth.signOut().then(function() {
-        console.log("User signed out")
-    }).catch(function(error) {
-        console.log(error.message)
-    })
-    document.getElementById("signin-email").value = "";
-    document.getElementById("signin-pass").value = "";
-})
-
 // Log in
 if (document.querySelector("#loginForm")){
 	const loginForm = document.querySelector("#loginForm")
