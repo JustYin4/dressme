@@ -23,6 +23,7 @@ window.onload = function() {
 
 function addClothes(user) {
     document.getElementById("upload").style.display = "inline";
+    document.getElementById("chooseOutfit").style.display = "None";
     document.getElementById("show").style.display = "None";
     document.querySelector(".pictures").style.display = "None";
 }
