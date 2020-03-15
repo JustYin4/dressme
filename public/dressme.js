@@ -232,7 +232,7 @@ function others(user) {
     user = removeSpecialChar;
 
 
-    retrieve(user, "Others").then(function(result) {
+    retrieve(user, "others").then(function(result) {
         for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
