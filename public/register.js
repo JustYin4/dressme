@@ -9,7 +9,6 @@ if (document.querySelector("#signupForm")) {
 	register.addEventListener("click", function(event) {
 		// Prevent page refresh
 		event.preventDefault();
-		console.log("goes here")
 
 		// Get user info
 		const email = signupForm["signup-email"].value;
