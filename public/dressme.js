@@ -249,6 +249,7 @@ function others(user) {
 function sendGet(clothType) {
     document.getElementById("upload").style.display = "None";
     document.getElementById("chooseOutfit").style.display = "None";
+    document.querySelector(".pictures").innerHTML = "";
     document.getElementById("show").style.display = "inline";
     document.querySelector(".pictures").style.display = "inline";
     let xhr = new XMLHttpRequest();
