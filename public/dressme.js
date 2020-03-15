@@ -28,6 +28,7 @@ function addClothes(user) {
 }
 
 function displayOutfitChoices(user) {
+    sendGet("Outfits");
     document.getElementById("chooseOutfit").style.display = "inline";
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
@@ -245,6 +246,7 @@ function others(user) {
 // Sends the request to the server
 function sendGet(clothType) {
     document.getElementById("upload").style.display = "None";
+    document.getElementById("chooseOutfit").style.display = "None";
     document.getElementById("show").style.display = "inline";
     document.querySelector(".pictures").style.display = "inline";
     let xhr = new XMLHttpRequest();
