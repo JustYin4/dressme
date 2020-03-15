@@ -13,66 +13,44 @@
 
 // Makes sure that event listeners are added after the web page is loaded
 window.onload = function() {
-	if (document.getElementById("upload")){
-		document.getElementById("upload").style.display = "None";
-	}
+    if (document.getElementById("upload")) {
+        document.getElementById("upload").style.display = "None";
+    }
 }
+
 function addClothes(user) {
-	document.getElementById("upload").style.display = "inline";
-	document.getElementById("show").style.display = "None";
-	document.querySelector(".pictures").style.display = "None";
+    document.getElementById("upload").style.display = "inline";
+    document.getElementById("show").style.display = "None";
+    document.querySelector(".pictures").style.display = "None";
 }
 
-function displayOutfitChoices(user){
-	var allPictures = document.querySelector(".pictures");
-    allPictures.innerHTML = "";
-
+function displayOutfitChoices(user) {
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
     user = removeSpecialChar;
 
-
-    retrieve(user, "all").then(function(result) {
-        for (i=0; i<result.length; i++) {
-            image = result[i];
-            var picture = document.createElement("img");
-            picture.src = image;
-            picture.className = "img";
-			picture.style.borderColor = "black";
-			picture.style.borderStyle = "solid";
-			picture.style.borderWidths = "1px";
-			picture.addEventListener("click", selectedPicture);
-            allPictures.appendChild(picture);
-        }
-    }).catch(function(error) {
-        console.log(error)
+    retrieveBranchNames(user)
+    document.getElementById("getOutfit").addEventListener("click", retrieveImages => {
+        selected = document.getElementById("chosenOutfit")
+        selectedVal = selected.options[selected.selectedIndex].value
+        var allPictures = document.querySelector(".pictures");
+        allPictures.innerHTML = "";
+        retrieveOutfits(user, selectedVal).then(function(result) {
+            console.log(result)
+            for (i = 0; i < result.length; i++) {
+                image = result[i];
+                var picture = document.createElement("img");
+                picture.src = image;
+                picture.className = "img";
+                picture.style.borderColor = "black";
+                picture.style.borderStyle = "solid";
+                picture.style.borderWidths = "1px";
+                allPictures.appendChild(picture);
+            }
+        }).catch(function(error) {
+            console.log(error)
+        })
     })
-}
-
-function selectedPicture(){
-	if (this.style.borderColor == "blue"){
-		this.style.borderColor = "black";
-	}
-	else {
-		this.style.borderColor = "blue";
-	}
-}
-
-function createOutfit(user){
-	let selected = [];
-	let pictures = document.querySelector(".pictures").childNodes;
-	for (let i = 0; i < pictures.length; i++){
-		let pic = pictures[i];
-		if (pic.style.borderColor == "blue"){
-			selected.push(pic);
-		}
-	}
-	if (selected.length == 0){
-		alert("You did not select any clothes. Please try again.");
-		return
-	}
-	let outfitName = prompt("What would you like to call this outfit?", "Outfit");
-	return selected
 }
 
 // Event listeners that call a request chain for getting the proper clothing
@@ -87,7 +65,7 @@ function allButton(user) {
 
 
     retrieve(user, "all").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -110,7 +88,7 @@ function shirts(user) {
 
 
     retrieve(user, "shirts").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -133,7 +111,7 @@ function pants(user) {
 
 
     retrieve(user, "pants").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -156,11 +134,11 @@ function outerwear(user) {
 
 
     retrieve(user, "outerwear").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
-            picture.className = "img"
+            picture.className = "img";
             outerwearPictures.appendChild(picture);
         }
     }).catch(function(error) {
@@ -179,7 +157,7 @@ function accessories(user) {
 
 
     retrieve(user, "accessories").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -202,7 +180,7 @@ function footwear(user) {
 
 
     retrieve(user, "footwear").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -225,7 +203,7 @@ function hats(user) {
 
 
     retrieve(user, "hats").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -248,7 +226,7 @@ function others(user) {
 
 
     retrieve(user, "Others").then(function(result) {
-        for (i=0; i<result.length; i++) {
+        for (i = 0; i < result.length; i++) {
             image = result[i];
             var picture = document.createElement("img");
             picture.src = image;
@@ -262,9 +240,9 @@ function others(user) {
 
 // Sends the request to the server
 function sendGet(clothType) {
-	document.getElementById("upload").style.display = "None";
-	document.getElementById("show").style.display = "inline";
-	document.querySelector(".pictures").style.display = "inline";
+    document.getElementById("upload").style.display = "None";
+    document.getElementById("show").style.display = "inline";
+    document.querySelector(".pictures").style.display = "inline";
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", updateShow);
     xhr.open("GET", "http://localhost:8080/test?clothType=" + clothType);
@@ -292,7 +270,7 @@ function upload(user, selectedVal, image, imageName) {
     }
 
     console.log(user, selectedVal, image, imageName)
-    // Option to add later: fixing unintended overwrite when using 2 of the same image names
+        // Option to add later: fixing unintended overwrite when using 2 of the same image names
 
     uploadTask.on("state_changed", function(snapshot) {
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -318,22 +296,22 @@ function upload(user, selectedVal, image, imageName) {
             ref.child(user).once("value", gotUserData);
 
             function gotUserData(snapshot) {
+                // If image doesn't exist, create the branches
                 if (!snapshot.exists()) {
                     updates["/" + user + "/" + selectedVal + "/" + postKey] = postData;
                     updates["/" + user + "/all/" + postKey] = postData;
                     firebase.database().ref().update(updates)
                 }
+                // Go through each branch and check if the image name already exists
                 snapshot.forEach(userSnapshot => {
                     if (rawImageName === userSnapshot.key) {
                         updates["/" + selectedVal + "/" + postKey] = postData;
                         firebase.database().ref().update(updates)
-                        console.log("goes here")
                     } else {
                         updates["/" + user + "/all/" + postKey] = postData;
                         firebase.database().ref().update(updates)
                         updates["/" + user + "/" + selectedVal + "/" + postKey] = postData;
                         firebase.database().ref().update(updates)
-                        console.log("goes here")
                     }
                 })
             }
@@ -345,6 +323,52 @@ function retrieve(user, choice) {
     return new Promise(function(resolve, reject) {
         try {
             var db = firebase.database().ref().child(user + "/" + choice);
+            console.log(db)
+            db.once("value", pics => {
+                if (!pics.exists()) {
+                    resolve([])
+                } else {
+                    var picHtml = []
+                    pics.forEach(pic => {
+                        picHtml.push(pic.val().url)
+                    })
+                    resolve(picHtml)
+                }
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+function retrieveBranchNames(user) {
+    return new Promise(function(resolve, reject) {
+        var db = firebase.database().ref().child(user + "/outfits/");
+        let branches = []
+        db.once("value", function(snapshot) {
+            snapshot.forEach(branchSnapshot => {
+                branches.push(branchSnapshot.key)
+            })
+            resolve(branches)
+        })
+    }).then(function(value) {
+        var allOutfits = document.querySelector("#chosenOutfit");
+        for (i = 0; i < value.length; i++) {
+            branch = value[i];
+            var newBranch = document.createElement("option");
+            newBranch.value = branch
+            newBranch.text = branch
+            allOutfits.appendChild(newBranch);
+        }
+    })
+}
+
+
+function retrieveOutfits(user, choice) {
+    return new Promise(function(resolve, reject) {
+        try {
+            var db = firebase.database().ref().child(user + "/outfits/" + choice);
+            console.log(db)
             db.once("value", pics => {
                 if (!pics.exists()) {
                     resolve([])

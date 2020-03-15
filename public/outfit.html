@@ -13,34 +13,35 @@
 -->
 <html>
 
-</html>
 <head>
     <meta name="viewport" content="width=device-width">
     <title>DressMeOutfit</title>
     <link rel="stylesheet" href="dressmeStyles.css">
-    <script type="text/javascript" src="dressme.js"></script>
 </head>
 
 <body>
-	<h1 id="closetName">Jhusthin's closet</h1>
+	<h1 id="closetName">Create an outfit</h1>
 
 	<div id="buttons">
 		<a href="index.html">
 			<button id="back" class="buttons"> Back </button>
 		</a>
-		<button id="createO" class="buttons"> Create </button>	
+		<button id="createOutfit" class="buttons"> Create </button>	
 	</div>
 
 	<div>
 		<center>
 			<p>Select the clothes that you want to add to your outfit. Then click create to save your outfit!</p>
 		</center>
-	</div>
+    </div>
+
 	<div class="pictures" id="selectPics">
 		<!-- IMAGES -->
-	</div>
+    </div>
 
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-auth.js"></script>
@@ -65,6 +66,7 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
-	<script src="auth.js"></script>
+    <script type="text/javascript" src="dressme.js"></script>
+    <script type="text/javascript" src="outfit.js"></script>
 </body>
 </html>
