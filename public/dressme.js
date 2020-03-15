@@ -377,8 +377,7 @@ function retrieveOutfits(user, choice) {
     return new Promise(function(resolve, reject) {
         try {
             var db = firebase.database().ref().child(user + "/outfits/" + choice);
-            console.log(db)
-            db.once("value", pics => {
+            db.on("value", pics => {
                 if (!pics.exists()) {
                     resolve([])
                 } else {
