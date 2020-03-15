@@ -11,11 +11,12 @@
   Purpose: Commnicates with a firebase database and retrieves images
 */
 auth = firebase.auth()
-
+console.log("Connected to auth.js")
 
 // Create promise to retrieve information when function is completed
 const promise1 = new Promise(function(resolve, reject) {
     auth.onAuthStateChanged((user) => {
+		console.log("Connected to auth.js")
             // If user is logged in, enable uploading and retriving
             if (user) {
 				console.log("User logged in")
@@ -64,27 +65,6 @@ const promise1 = new Promise(function(resolve, reject) {
 	document.getElementById("others").addEventListener("click", function() { others(value) });
 	document.getElementById("outfits").addEventListener("click", function() { displayOutfitChoices(value) });
 })
-
-// Sign up
-if (document.querySelector("#signupForm")) {
-	const signupForm = document.querySelector("#signupForm")
-	signupForm.addEventListener("submit", function(event) {
-		// Prevent page refresh
-		event.preventDefault();
-
-		// Get user info
-		const email = signupForm["signup-email"].value;
-		const pass = signupForm["signup-pass"].value;
-
-		// Initialize and create user
-		auth.createUserWithEmailAndPassword(email, pass).then(function(credential) {
-			console.log("User created an account");
-			console.log(credential.user);
-		}).catch(function(error) {
-			console.log(error.message);
-		})
-	})
-}
 
 // Sign out
 const logout = document.querySelector("#logout")
