@@ -62,19 +62,40 @@ span {
     font-weight: bold;
 }
 
+#addItem {
+    font: 14px calibri;
+    color: #777;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: .75px solid #d3d3d3;
+    background-color: white;
+}
+
 
 
 /* outfit.html only*/
 
 #back {
-    border: .75px solid #777;
+    border: .75px solid #d3d3d3;
     background-color: white;
     margin-right: 10px;
 }
 
-#createO {
+#createOutfit {
     border: .75px solid #d3d3d3;
     background-color: white;
+}
+
+#outfitInfo {
+    text-align: center;
+    font: 14px calibri;
+    background-color: #FAF0E6;
+    color: #777;
 }
 
 

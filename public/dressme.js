@@ -30,6 +30,7 @@ function addClothes(user) {
 function displayOutfitChoices(user) {
     sendGet("Outfits");
     document.getElementById("chooseOutfit").style.display = "inline";
+    document.querySelector("#chosenOutfit").innerHTML = None;
     removeDomain = user.substring(0, user.lastIndexOf("@"));
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
     user = removeSpecialChar;
