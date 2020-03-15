@@ -73,7 +73,7 @@ span {
 }
 
 #createO {
-    border: .75px solid #777;
+    border: .75px solid #d3d3d3;
     background-color: white;
 }
 
@@ -178,4 +178,61 @@ img {
 label {
     font: 14px calibri;
     color: #777;
+}
+
+#login {
+    font: 14px calibri;
+    color: #777;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: .75px solid #d3d3d3;
+    background-color: white;
+}
+
+#logout {
+    font: 14px calibri;
+    color: #777;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: .75px solid #d3d3d3;
+    background-color: white;
+}
+
+#register {
+    font: 14px calibri;
+    color: #777;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: .75px solid #d3d3d3;
+    background-color: white;
+}
+
+/* outfit */
+#getOutfit {
+    font: 14px calibri;
+    color: #777;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: .75px solid #d3d3d3;
+    background-color: white;
 }
