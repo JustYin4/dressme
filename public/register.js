@@ -1,3 +1,15 @@
+/*
+  Author(s): Yi Yang,
+             Justin Yin,
+             Jacy Yu,
+             Cameron Fritz
+  
+  Date Created: 3/15/2020
+  Last Updated: 3/17/2020
+  
+  File: register.js
+  Purpose: Script for allowing users to create profiles for dressme
+*/
 auth = firebase.auth()
 console.log("Connected to register.js")
 

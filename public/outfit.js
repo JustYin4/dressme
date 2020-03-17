@@ -1,6 +1,19 @@
+/*
+  Author(s): Cameron Fritz,
+             Justin Yin,
+             Jacy Yu,
+             Yi Yang
+  
+  Date Created: 3/14/2020
+  Last Updated: 3/17/2020
+  
+  File: outfit.js
+  Purpose: Functions and scripts for allowing users to create outfits, and then uploading them to the database
+*/
 value = localStorage["user"]
 console.log(value) 
 
+// Grabs selected pictures and sends them to be uploaded
 function createOutfit(value){ 
     let selected = []
     let pictures = document.querySelector(".pictures").childNodes;
@@ -18,6 +31,7 @@ function createOutfit(value){
     upload(value, selected, outfitName)
 }
 
+// Selects and unselects a given image
 function selectImage() {
     if (this.style.backgroundColor == 'white') {
         this.style.backgroundColor = "lightgray";
@@ -26,6 +40,7 @@ function selectImage() {
     }
 }
 
+// Grabs all images in database and displays them
 function allButton(user) {
     var allPictures = document.querySelector(".pictures");
     allPictures.innerHTML = "";
@@ -55,6 +70,7 @@ allButton(value)
 create = document.getElementById("createOutfit")
 create.addEventListener("click", function() { createOutfit(value) })
 
+// Uploads the images to the database based on the given name
 function upload(user, imageList, outfitName) {
     // Strip email
     removeDomain = user.substring(0, user.lastIndexOf("@"));

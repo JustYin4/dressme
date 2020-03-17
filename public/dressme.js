@@ -5,7 +5,7 @@
              Cameron Fritz
   
   Date Created: 3/3/2020
-  Last Updated: 3/13/2020
+  Last Updated: 3/17/2020
   
   File: dressme.js
   Purpose: Event listeners and scripts to communicate with the dressme server
@@ -21,6 +21,7 @@ window.onload = function() {
     }
 }
 
+// Changes display to allow users to upload pictures
 function addClothes(user) {
     document.getElementById("upload").style.display = "inline";
     document.getElementById("chooseOutfit").style.display = "None";
@@ -28,6 +29,7 @@ function addClothes(user) {
     document.querySelector(".pictures").style.display = "None";
 }
 
+// Displays the outfit picker and displays the outfit picked
 function displayOutfitChoices(user) {
     sendGet("Outfits");
     document.getElementById("chooseOutfit").style.display = "inline";
@@ -36,6 +38,7 @@ function displayOutfitChoices(user) {
     removeSpecialChar = removeDomain.replace(/@[^@]+$/, '');
     user = removeSpecialChar;
 
+	// Retrieves the images for the choosen outfit and displays them
     retrieveBranchNames(user)
     document.getElementById("getOutfit").addEventListener("click", retrieveImages => {
         selected = document.getElementById("chosenOutfit")
@@ -254,7 +257,7 @@ function sendGet(clothType) {
     document.querySelector(".pictures").style.display = "inline";
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", updateShow);
-    xhr.open("GET", "http://localhost:8080/test?clothType=" + clothType);
+    xhr.open("GET", "http://localhost:8080/display?clothType=" + clothType);
     xhr.send();
 }
 
@@ -264,6 +267,7 @@ function updateShow() {
     display.innerHTML = this.response;
 }
 
+// Function for uploading the image to the database
 function upload(user, selectedVal, image, imageName) {
     // Format parameters
     var rawImageName = imageName.replace(/\..+$/, '')
@@ -328,6 +332,7 @@ function upload(user, selectedVal, image, imageName) {
     });
 }
 
+// Function for retrieving an image from the database
 function retrieve(user, choice) {
     return new Promise(function(resolve, reject) {
         try {
@@ -350,6 +355,7 @@ function retrieve(user, choice) {
     })
 }
 
+// Function for retrieving the names of the outfits to allow the user to select from outfits they own
 function retrieveBranchNames(user) {
     return new Promise(function(resolve, reject) {
         var db = firebase.database().ref().child(user + "/outfits/");
@@ -372,7 +378,7 @@ function retrieveBranchNames(user) {
     })
 }
 
-
+// Function for retrieving the outfit and its associated images
 function retrieveOutfits(user, choice) {
     return new Promise(function(resolve, reject) {
         try {

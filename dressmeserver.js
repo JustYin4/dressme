@@ -36,8 +36,8 @@ app.use(session({
     activeDuration: 5 * 60 * 1000,
 }));
 
-// Test endpoint
-app.get("/test", function(req, res) {
+// Display endpoint
+app.get("/display", function(req, res) {
     console.log(req.query.clothType);
     res.send("<h1>" + String(req.query.clothType) + "</h1>");
 });
