@@ -6,6 +6,26 @@ npm,
 express,
 client-sessions
 
+# File Structure
+
+node_modules
+
+public
+	auth.js
+	closet.jpg
+	dressme.js
+	dressmeStyles.css
+	index.html
+	outfit.html
+	outfit.js
+	register.html
+	register.js
+
+dressmeserver.js
+
+package-lock.json
+
+README.md
 
 # How to Run DressMe:
 
